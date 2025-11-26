@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+.env
+.pytest_cache/
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Docker / runtime files
+results.json
+*.log
+*.sqlite3
+
+# Git
+.gitignore~
+

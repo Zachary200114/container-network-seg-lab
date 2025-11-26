@@ -1,0 +1,30 @@
+{
+  "allowed_flows": [
+    {
+      "from": "frontend",
+      "to": "api",
+      "ports": [80, 5000]
+    },
+    {
+      "from": "api",
+      "to": "db",
+      "ports": [5432]
+    },
+    {
+      "from": "mgmt",
+      "to": "api",
+      "ports": [5000]
+    },
+    {
+      "from": "mgmt",
+      "to": "db",
+      "ports": [5432]
+    },
+    {
+      "from": "db",
+      "to": "api",
+      "ports": [5000]
+    }
+  ]
+}
+

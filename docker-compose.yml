@@ -1,0 +1,56 @@
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    networks:
+      - public_net
+    ports:
+      - "8080:80"
+
+  api:
+    build: ./api
+    container_name: api
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - public_net
+      - private_net
+    ports:
+      - "5001:5000"
+
+  db:
+    image: postgres:16-alpine
+    container_name: db
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: demo
+    networks:
+      - private_net
+
+  mgmt:
+    build: ./mgmt
+    container_name: mgmt
+    networks:
+      - private_net
+      - mgmt_net
+
+  dashboard:
+    build: ./dashboard
+    container_name: dashboard
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./results.json:/data/results.json:ro
+
+  attacker:
+    build: ./attacker
+    container_name: attacker
+    networks:
+      - public_net
+
+networks:
+  public_net:
+  private_net:
+  mgmt_net:
+
