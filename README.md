@@ -534,5 +534,4 @@ For guided exercises and ideas on how to extend the lab, see [`LAB.md`](./LAB.md
 
 ```
 
-If you want, I can also tune this to match your exact class/project audience (e.g., “for a security club workshop” or “for internship portfolio”) with a short “Why I built this” section at the top.
 ```
