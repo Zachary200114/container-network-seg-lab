@@ -1,6 +1,3 @@
-Here’s a cleaned-up, detailed README you can drop straight into `README.md` to replace what you have now:
-
-````markdown
 # Container Network Segmentation Lab
 
 This project is a self-contained lab that simulates a small, segmented enterprise network using Docker. It is designed to demonstrate:
@@ -66,6 +63,7 @@ Only specific containers are attached to each network, which enforces segmentati
                 |          [mgmt]           |
                 +----------------------------+
 ```
+
 ````
 
 ### Services
@@ -535,3 +533,4 @@ For guided exercises and ideas on how to extend the lab, see [`LAB.md`](./LAB.md
 ```
 
 ```
+````
