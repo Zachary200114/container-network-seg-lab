@@ -106,3 +106,48 @@ Only specific containers are attached to each network, enforcing segmentation by
 - Container with `nmap`, `curl`, and scanning tools
 - Network: `public_net` only
 - Used to simulate an external attacker
+
+---
+
+## What This Lab Demonstrates
+
+### Network segmentation
+
+- frontend → api allowed
+- frontend → db blocked
+- attacker → db blocked
+- db and mgmt cannot reach frontend
+
+### Multi-tier application flow
+
+- Host → API (5001)
+- API → DB (5432 on `private_net`)
+
+### Host-based firewalling with iptables
+
+- db → api:5000 intentionally blocked
+- Docker would normally allow this, but iptables denies it
+- Demonstrates host-level network enforcement
+
+### Policy-as-code testing
+
+- `policy.json` defines allowed flows
+- `connectivity_test.py` validates:
+  - Ping matrix
+  - TCP checks (via `nc`)
+  - Writes results to `results.json`
+
+### Dashboard visualization
+
+Displays:
+
+- Ping matrix
+- TCP policy verification results
+
+### Attacker perspective
+
+Attacker container performs:
+
+- nmap scans
+- HTTP probing
+- Attempts (and fails) to reach db
