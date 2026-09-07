@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Segmentation Lab Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <h1>Segmentation Lab Dashboard</h1>
+  <p>Run the Docker network lab in your browser. Each session starts real containers and lasts five minutes.</p>
+  <p><a href="https://github.com/Zachary200114/container-network-seg-lab" target="_blank" rel="noopener noreferrer">View the original Docker lab on GitHub</a> · <a href="https://zachary200114.github.io/">Back to portfolio</a></p>
+  <div class="controls">
+    <button id="start" type="button">Start live lab</button>
+    <button id="stop" type="button" disabled>Stop lab</button>
+    <span id="timer"></span>
+  </div>
+  <p id="session-status" role="status" aria-live="polite">No lab running. Start a session to take measurements.</p>
+  <p id="error" role="alert" hidden></p>
+  <p>Last updated: <span id="last-updated">No measurements yet.</span></p>
+  <button id="audit" type="button" data-ready disabled>Run connectivity tests</button>
+
+  <h2>Ping Matrix</h2>
+  <div class="table-scroll"><table border="1" cellpadding="5" id="ping-matrix">
+    <caption class="visually-hidden">Actual ping measurements between containers</caption>
+    <thead><tr><th scope="col">From \ To</th><th scope="col">frontend</th><th scope="col">api</th><th scope="col">db</th><th scope="col">mgmt</th><th scope="col">attacker</th></tr></thead>
+    <tbody><tr><td colspan="6">Start the lab and run connectivity tests.</td></tr></tbody>
+  </table></div>
+
+  <h2>Policy-based TCP Checks</h2>
+  <p>Policy intent comes from the original <code>policy.json</code>. The measured result comes from a real TCP connection inside the selected container network.</p>
+  <div class="table-scroll"><table border="1" cellpadding="5" id="policy-checks">
+    <caption class="visually-hidden">Declared policy compared with live TCP probes</caption>
+    <thead><tr><th scope="col">From</th><th scope="col">To</th><th scope="col">Port</th><th scope="col">In policy</th><th scope="col">Status</th><th scope="col">Measured result</th></tr></thead>
+    <tbody><tr><td colspan="6">No connectivity tests have run.</td></tr></tbody>
+  </table></div>
+  <p><strong>OK</strong> = connected; <strong>X</strong> = unreachable or refused; <strong>TO</strong> = timed out; <strong>SELF</strong> = same container.</p>
+
+  <h2>Test a connection</h2>
+  <form id="probe-form" class="controls">
+    <label>From <select id="from" data-ready disabled><option>frontend</option><option>api</option><option>db</option><option>mgmt</option><option>attacker</option></select></label>
+    <label>To <select id="to" data-ready disabled><option>api</option><option>frontend</option><option>db</option><option>mgmt</option><option>attacker</option></select></label>
+    <label>TCP port <select id="port" data-ready disabled><option value="5000">5000 (API)</option><option value="80">80 (frontend)</option><option value="5432">5432 (PostgreSQL)</option></select></label>
+    <button type="submit" data-ready disabled>Probe connection</button>
+  </form>
+  <p id="probe-result" role="status" aria-live="polite">Choose a container pair to test.</p>
+
+  <h2>Lab exercises</h2>
+  <p>These controls change the running Docker environment. Run the connectivity tests again to observe the effect.</p>
+  <p><label><input id="db-public" type="checkbox" data-ready disabled> Also attach the database to <code>public_net</code></label></p>
+  <p><label><input id="firewall" type="checkbox" data-ready disabled> Apply the documented firewall rule: drop <code>db → api:5000</code> from its private-network address</label></p>
+  <button id="reset" type="button" data-ready disabled>Restore original network settings</button>
+  <p>The original Compose setup does not apply the manual firewall rule automatically. Declaring a flow in <code>policy.json</code> does not open a port or change Docker networking.</p>
+
+  <h2>Running containers</h2>
+  <div class="table-scroll"><table border="1" cellpadding="5" id="containers">
+    <thead><tr><th scope="col">Container</th><th scope="col">State</th><th scope="col">Docker networks</th></tr></thead>
+    <tbody><tr><td colspan="3">No lab running.</td></tr></tbody>
+  </table></div>
+  <p class="footnote">Every result is measured during your session. Containers are private to the session and are discarded when it ends.</p>
+</body>
+</html>

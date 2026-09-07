@@ -1,5 +1,11 @@
 # Container Network Segmentation Lab
 
+## Live browser demo
+
+[Open the live Docker lab](https://network-segmentation-lab.vercel.app) to start a temporary session, run the real connectivity matrix, probe container service ports, and try the network and firewall exercises. Each session runs isolated Docker containers and shuts down after five minutes.
+
+The original local Docker workflow below is unchanged. Hosting instructions and verification details are in [demo/README.md](demo/README.md).
+
 This project is a self-contained lab that simulates a small, segmented enterprise network using Docker. It is designed to demonstrate:
 
 - Network segmentation across public, private, and management networks

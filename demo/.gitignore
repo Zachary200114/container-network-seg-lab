@@ -1,0 +1,8 @@
+node_modules/
+.vercel/
+.env*
+!.env.example
+.snapshot*.json
+__pycache__/
+*.pyc
+.vercel
